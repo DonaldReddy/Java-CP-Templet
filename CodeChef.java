@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class Main {
+class CodeChef {
 
     static FastIO io = new FastIO();
     static long mod = 1000000007;
@@ -20,6 +20,49 @@ public class Main {
     }
 
     static void solve() {
+        int n = io.nextInt();
+        String s = io.nextLine(), t = io.nextLine();
+        int s0 = 0, s1 = 0, t0 = 0, t1 = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '0')
+                s0++;
+            else
+                s1++;
+        }
+        for (char c : t.toCharArray()) {
+            if (c == '0')
+                t0++;
+            else
+                t1++;
+        }
+
+        while (s0 != t0 && s1 != t1) {
+            if (t0 > s0) {
+                int req = t0 - s0;
+                if (req % 2 != 0) {
+                    no();
+                    return;
+                }
+                s0 += req;
+                s1 -= req;
+            }
+            else if (t1 > s1) {
+                int req = t1 - s1;
+                if (req % 2 != 0) {
+                    no();
+                    return;
+                }
+                s0 -= req;
+                s1 += req;
+            }
+        }
+
+        if ((s0 == t0 && s1 == t1)) {
+            yes();
+            return;
+        }
+
+
 
     }
 
