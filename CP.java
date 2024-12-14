@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class Main {
+class CP {
 
     static FastIO io = new FastIO();
     static long mod = 1000000007;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws java.lang.Exception {
         int t = io.nextInt();
         // int t = 1;
         for (int tc = 1; tc <= t; tc++) {
@@ -21,6 +21,17 @@ public class Main {
 
     static void solve() {
 
+        String s = io.nextLine(), p = io.nextLine();
+        List<Integer> occ = matchPatterZ(s, p, "$");
+
+        if (occ.size() == 0)
+            io.println("Not Found");
+        else {
+            io.println(occ.size());
+            io.printList(occ);
+        }
+
+        io.println("");
     }
 
     // Miscellaneous ---------------------------
@@ -33,9 +44,71 @@ public class Main {
         io.println("NO");
     }
 
+    // String utils -----------------------
+
+    /**
+     * Checks if the pattern {@code p} is present in the string {@code s} using the
+     * {@code Z-algorithm}.
+     *
+     * The Z-algorithm is used to find occurrences of a pattern within a text
+     * efficiently.
+     * This method concatenates the pattern {@code p}, a delimiter, and the string
+     * {@code s} to
+     * form a new string {@code temp}.
+     * It then computes the Z-array for {@code temp}, which stores the length of the
+     * longest substring starting
+     * from each position that matches the prefix of {@code temp}.
+     *
+     * @param s         The string in which to search for the pattern.
+     * @param p         The pattern to search for within the string {@code s}.
+     * @param delimiter A delimiter character to separate the pattern {@code p} and
+     *                  the
+     *                  string {@code s} in the concatenated string {@code temp}.
+     * @return The number of times the pattern {@code p} occurs in the string
+     *         {@code s}.
+     */
+    static List<Integer> matchPatterZ(String s, String p, String delimiter) {
+        String temp = p + delimiter + s;
+        int l = 0, r = 0, n = temp.length(), z[] = new int[n];
+        for (int i = 1; i < n; i++) {
+            if (i < r)
+                z[i] = Math.min(z[i - l], r - i + 1);
+            while (i + z[i] < n && temp.charAt(z[i]) == temp.charAt(i + z[i])) {
+                z[i]++;
+            }
+            if (r < (z[i] + i - 1)) {
+                l = i;
+                r = i + z[i] - 1;
+            }
+        }
+        List<Integer> occurrence = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (z[i] == p.length()) {
+                occurrence.add(i - p.length());
+            }
+        }
+
+        return occurrence;
+    }
+
+    static void rabinKarp(String s) {
+        // change p to 31 if s has only lower case or upper case, if s has both upper
+        // and lower p=53.
+        int n = s.length();
+        long powArr[] = new long[n], hashArr[] = new long[n], p = 31;
+
+        hashArr[0] = s.charAt(0) - 'a' + 1;
+        powArr[0] = 1;
+
+        for (int i = 1; i < n; i++) {
+            powArr[i] = (powArr[i - 1] * p) % mod;
+            hashArr[i] = (hashArr[i - 1] + (s.charAt(i) - 'a' + 1) * powArr[i]) % mod;
+        }
+    }
+
     // Pair class -------------------------------
 
-    static class Pair {
+    class Pair {
         int i, j, time;
 
         Pair(int i, int j, int time) {
@@ -47,56 +120,59 @@ public class Main {
 
     // Math functions ---------------------------
 
-    static long gcd(long a, long b) {
-        if (b == 0)
-            return a;
-        return gcd(b, a % b);
-    }
+    static class CMath {
 
-    static boolean isPrime(long n) {
-        if (n <= 1)
-            return false;
-        long count = 0;
-        for (int i = 2; i * i <= n; i++) {
-            if (n % i == 0) {
-                count++;
-                if (i != n / i)
+        static long gcd(long a, long b) {
+            if (b == 0)
+                return a;
+            return gcd(b, a % b);
+        }
+
+        static boolean isPrime(long n) {
+            if (n <= 1)
+                return false;
+            long count = 0;
+            for (int i = 2; i * i <= n; i++) {
+                if (n % i == 0) {
                     count++;
+                    if (i != n / i)
+                        count++;
+                }
             }
+            return count == 0;
         }
-        return count == 0;
-    }
 
-    static long sum(int[] arr) {
-        long sum = 0;
-        for (int i : arr)
-            sum += i;
-        return sum;
-    }
-
-    static long pow(long a, long b) {
-        long res = 1;
-        while (b > 0) {
-            if ((b & 1) == 1)
-                res *= a;
-            a *= a;
-            b >>= 1;
+        static long sum(int[] arr) {
+            long sum = 0;
+            for (int i : arr)
+                sum += i;
+            return sum;
         }
-        return res;
-    }
 
-    static long pow(long a, long b, long mod) {
-        long res = 1;
-        while (b > 0) {
-            if ((b & 1) == 1)
-                res = (res * a) % mod;
-            a = (a * a) % mod;
-            b >>= 1;
+        static long pow(long a, long b) {
+            long res = 1;
+            while (b > 0) {
+                if ((b & 1) == 1)
+                    res *= a;
+                a *= a;
+                b >>= 1;
+            }
+            return res;
         }
-        return res;
+
+        static long pow(long a, long b, long mod) {
+            long res = 1;
+            while (b > 0) {
+                if ((b & 1) == 1)
+                    res = (res * a) % mod;
+                a = (a * a) % mod;
+                b >>= 1;
+            }
+            return res;
+        }
     }
 
-    // input class----------------------------
+    // input/output class----------------------------
 
     static class FastIO {
         BufferedReader br;
@@ -360,6 +436,12 @@ public class Main {
         void printArr(String[] arr) {
             for (String s : arr)
                 System.out.print(s + " ");
+            System.out.println();
+        }
+
+        void printList(List<Integer> arr) {
+            for (Integer i : arr)
+                System.out.print(i + " ");
             System.out.println();
         }
 
@@ -737,7 +819,8 @@ public class Main {
             System.out.println();
         }
 
-        private static void rightView(Node root, LinkedHashMap<Integer, Integer> lev, int d) {
+        private static void rightView(Node root, LinkedHashMap<Integer, Integer> lev,
+                int d) {
             if (root == null)
                 return;
             lev.put(d, root.val);
