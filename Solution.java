@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class CodeChef {
+public class Solution {
 
     static FastIO io = new FastIO();
     static long mod = 1_000_000_007;
 
     public static void main(String[] args) throws java.lang.Exception {
-        // int t = io.nextInt();
-        int t = 1;
+        int t = io.nextInt();
+        // int t = 1;
         for (int tc = 1; tc <= t; tc++) {
             // logic
             solve();
@@ -20,8 +20,6 @@ public class CodeChef {
     }
 
     static void solve() {
-        String s = io.nextLine();
-
     }
 
     // Miscellaneous ---------------------------
@@ -34,6 +32,14 @@ public class CodeChef {
         io.println("NO");
     }
 
+    public static boolean isPower(int x, int y) {
+        if (x <= 0 || y <= 1) {
+            return false;
+        }
+
+        double logResult = Math.log(x) / Math.log(y);
+        return Math.abs(logResult - Math.round(logResult)) < 1e-10;
+    }
     // input/output class----------------------------
 
     static class FastIO {

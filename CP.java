@@ -21,17 +21,6 @@ class CP {
 
     static void solve() {
 
-        String s = io.nextLine(), p = io.nextLine();
-        List<Integer> occ = matchPatterZ(s, p, "$");
-
-        if (occ.size() == 0)
-            io.println("Not Found");
-        else {
-            io.println(occ.size());
-            io.printList(occ);
-        }
-
-        io.println("");
     }
 
     // Miscellaneous ---------------------------
