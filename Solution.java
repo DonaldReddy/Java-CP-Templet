@@ -32,14 +32,6 @@ public class Solution {
         io.println("NO");
     }
 
-    public static boolean isPower(int x, int y) {
-        if (x <= 0 || y <= 1) {
-            return false;
-        }
-
-        double logResult = Math.log(x) / Math.log(y);
-        return Math.abs(logResult - Math.round(logResult)) < 1e-10;
-    }
     // input/output class----------------------------
 
     static class FastIO {
