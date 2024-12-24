@@ -131,13 +131,6 @@ class CP {
             return count == 0;
         }
 
-        static long sum(int[] arr) {
-            long sum = 0;
-            for (int i : arr)
-                sum += i;
-            return sum;
-        }
-
         static long pow(long a, long b) {
             long res = 1;
             while (b > 0) {
@@ -921,6 +914,24 @@ class CP {
                 this.hd = hd;
             }
         }
+    }
+
+    // Array methods ----------------------------
+
+    static void reverseArray(Object[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n / 2; i++) {
+            Object temp = arr[i];
+            arr[i] = arr[n - i - 1];
+            arr[n - i - 1] = temp;
+        }
+    }
+
+    static long sum(int[] arr) {
+        long sum = 0;
+        for (int i : arr)
+            sum += i;
+        return sum;
     }
 
 }
