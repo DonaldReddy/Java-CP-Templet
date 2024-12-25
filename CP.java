@@ -427,31 +427,37 @@ class CP {
             }
         }
 
-        void printIntArr(int[] arr) {
+        void println(int[] arr) {
             for (int i : arr)
                 print(i + " ");
             println();
         }
 
-        void printCharArr(char[] arr) {
+        void println(long[] arr) {
+            for (long i : arr)
+                print(i + " ");
+            println();
+        }
+
+        void println(char[] arr) {
             for (char c : arr)
                 print(c + " ");
             println();
         }
 
-        void printStringArr(String[] arr) {
+        void println(String[] arr) {
             for (String s : arr)
                 print(s + " ");
             println();
         }
 
-        void printList(List<Object> arr) {
+        void println(List<Object> arr) {
             for (Object i : arr)
                 print(i + " ");
             println();
         }
 
-        void printArray(Object[] arr) {
+        void println(Object[] arr) {
             for (Object obj : arr) {
                 print(obj.toString() + " ");
             }
@@ -466,6 +472,15 @@ class CP {
         int n = arr.length;
         for (int i = 0; i < n / 2; i++) {
             int temp = arr[i];
+            arr[i] = arr[n - i - 1];
+            arr[n - i - 1] = temp;
+        }
+    }
+
+    static void reverseArray(long[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n / 2; i++) {
+            long temp = arr[i];
             arr[i] = arr[n - i - 1];
             arr[n - i - 1] = temp;
         }
