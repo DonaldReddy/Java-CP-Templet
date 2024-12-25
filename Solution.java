@@ -9,6 +9,9 @@ public class Solution {
 
     static FastIO io = new FastIO();
     static long mod = 1_000_000_007;
+    static BufferedReader br;
+    static StringTokenizer st;
+    static BufferedWriter out;
 
     public static void main(String[] args) throws java.lang.Exception {
         int t = io.nextInt();
@@ -17,6 +20,8 @@ public class Solution {
             // logic
             solve();
         }
+        io.close();
+        io.flush();
     }
 
     static void solve() {
@@ -35,15 +40,29 @@ public class Solution {
     // input/output class----------------------------
 
     static class FastIO {
-        BufferedReader br;
-        StringTokenizer st;
-        BufferedWriter out;
 
         public FastIO() {
             br = new BufferedReader(
                     new InputStreamReader(System.in));
             out = new BufferedWriter(new OutputStreamWriter(System.out));
             st = new StringTokenizer("");
+        }
+
+        public void close() {
+            try {
+                br.close();
+                out.close();
+            } catch (IOException e) {
+                throw new RuntimeException("Error closing FastIO", e);
+            }
+        }
+
+        void flush() {
+            try {
+                out.flush();
+            } catch (IOException e) {
+                throw new RuntimeException("Error flushing FastIO", e);
+            }
         }
 
         String next() {
@@ -87,10 +106,6 @@ public class Solution {
 
         double[] nextLineToDoubleArr() {
             return Arrays.stream(nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
-        }
-
-        String[] nextLineToStringArr() {
-            return nextLine().split(" ");
         }
 
         long nextLong() {
@@ -143,7 +158,6 @@ public class Solution {
 
             try {
                 out.write(s + "\n");
-                out.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -154,7 +168,6 @@ public class Solution {
 
             try {
                 out.write(s);
-                out.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -165,7 +178,7 @@ public class Solution {
 
             try {
                 out.write(n + "\n");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -176,7 +189,7 @@ public class Solution {
 
             try {
                 out.write(n);
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -187,7 +200,7 @@ public class Solution {
 
             try {
                 out.write(n + "\n");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -198,7 +211,7 @@ public class Solution {
 
             try {
                 out.write(n + "");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -209,7 +222,7 @@ public class Solution {
 
             try {
                 out.write(n + "\n");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -220,7 +233,7 @@ public class Solution {
 
             try {
                 out.write(n + "");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -231,7 +244,7 @@ public class Solution {
 
             try {
                 out.write(n + "\n");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -242,7 +255,7 @@ public class Solution {
 
             try {
                 out.write(n + "");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -252,7 +265,7 @@ public class Solution {
         void println(StringBuilder sb) {
             try {
                 out.write(sb.toString() + "\n");
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -261,7 +274,7 @@ public class Solution {
         void print(StringBuilder sb) {
             try {
                 out.write(sb.toString());
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -270,7 +283,16 @@ public class Solution {
         void println(char c) {
             try {
                 out.write(c + "\n");
-                out.flush();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        void println() {
+            try {
+                out.write("\n");
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -279,40 +301,41 @@ public class Solution {
         void print(char c) {
             try {
                 out.write(c);
-                out.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        void printArr(int[] arr) {
+        void printIntArr(int[] arr) {
             for (int i : arr)
-                System.out.print(i + " ");
-            System.out.println();
+                print(i + " ");
+            println();
         }
 
-        void printArr(long[] arr) {
-            for (long i : arr)
-                System.out.print(i + " ");
-            System.out.println();
-        }
-
-        void printArr(char[] arr) {
+        void printCharArr(char[] arr) {
             for (char c : arr)
-                System.out.print(c + " ");
-            System.out.println();
+                print(c + " ");
+            println();
         }
 
-        void printArr(String[] arr) {
+        void printStringArr(String[] arr) {
             for (String s : arr)
-                System.out.print(s + " ");
-            System.out.println();
+                print(s + " ");
+            println();
         }
 
-        void printList(List<Integer> arr) {
-            for (Integer i : arr)
-                System.out.print(i + " ");
-            System.out.println();
+        void printList(List<Object> arr) {
+            for (Object i : arr)
+                print(i + " ");
+            println();
+        }
+
+        void printArray(Object[] arr) {
+            for (Object obj : arr) {
+                print(obj.toString() + " ");
+            }
+            println();
         }
 
     }
