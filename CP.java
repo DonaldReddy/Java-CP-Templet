@@ -12,6 +12,7 @@ class CP {
     static BufferedReader br;
     static StringTokenizer st;
     static BufferedWriter out;
+    static int[][] dp;
 
     public static void main(String[] args) throws java.lang.Exception {
         int t = io.nextInt();
@@ -20,6 +21,8 @@ class CP {
             // logic
             solve();
         }
+        io.flush();
+        io.close();
     }
 
     static void solve() {
