@@ -15,8 +15,8 @@ public class Solution {
     static int[][] dp;
 
     public static void main(String[] args) throws java.lang.Exception {
-        int t = io.nextInt();
-        // int t = 1;
+        // int t = io.nextInt();
+        int t = 1;
         for (int tc = 1; tc <= t; tc++) {
             // logic
             solve();
