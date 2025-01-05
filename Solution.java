@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-class Solution {
+public class Solution {
 
     static FastIO io = new FastIO();
     static long mod = 1_000_000_007;
